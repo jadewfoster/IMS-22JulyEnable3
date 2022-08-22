@@ -1,5 +1,5 @@
-Coverage: 34%
-# Bar Delivery Service - Fundamental Project, 2JulyEnable3
+Coverage: xx%
+# Bar Delivery Service - Inventory Management System (IMS)
 
 Using the given project template, the code has been altered and expanded so as to provide a fully functional command line interface that can be used by both customers and staff. The context is a bar delivery service, which allows customers to make an account, and create an order composed of several drinks in the bars inventory such as cocktails, beer, cider, wine etc. This order connects to the staff interface of the application, which allows them to update their menu, view orders, take payment, etc. Therefore this application provides the medium for the bar to take online orders for delivery, as well as for the customers to place them.
 
@@ -83,6 +83,7 @@ We use [GitHub](https://github.com/) for versioning.
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
 * **Jade Willow Foster** - *Project work* - [jadewfoster](https://github.com/jadewfoster)
+
 ## License
 
 This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details 
@@ -92,7 +93,3 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 * QA Academy
 * Trainers: Victoria Sacre, Jordan Benbelaid, Anoush Lowton, Christopher Yiangou.
-
-
-# IMS-Start
-# IMS-Start
