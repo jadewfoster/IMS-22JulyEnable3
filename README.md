@@ -4,7 +4,8 @@ Coverage: 34%
 Using the given project template, the code has been altered and expanded so as to provide a fully functional command line interface that can be used by both customers and staff. The context is a bar delivery service, which allows customers to make an account, and create an order composed of several drinks in the bars inventory such as cocktails, beer, cider, wine etc. This order connects to the staff interface of the application, which allows them to update their menu, view orders, take payment, etc. Therefore this application provides the medium for the bar to take online orders for delivery, as well as for the customers to place them.
 
 Jira was used to create a Scrum board, as shown below:
-<img src="file:///C:/Users/44749/Desktop/QA/Projects/IMS-22JulyEnable3/documentation/screenshots/Scrum%20Board%20in%20Jira.jpg" alt="">
+
+<img src="/documentation/screenshots/jira-scrum-board" alt="Jira Scrum Board" style ="width:128px;height:128px;">
 
 ## Getting Started
 
