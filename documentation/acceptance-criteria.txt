@@ -1,0 +1,55 @@
+ACCEPTANCE CRITERIA
+
+1. Given the user is on the main page
+When I enter the shortcut key
+And press enter
+Then it takes me to the relevant page
+
+2. Given the user is on any page
+When I enter q
+Then I exit the program
+
+3. Given the user is on a page
+When I enter m
+Then I exit back to the main menu
+
+
+CUSTOMER SIDE
+1. Given the user is taken to the make orders page
+When I select the items I would like in my order
+Then it displays the total cost
+
+2. Given the user is taken to the make orders page
+When I confirm my order
+Then it displays "Order successful"
+
+3. Given the user is on the customer account page
+When I choose to sign in
+And enter my login details
+Then I can read and update my details
+
+4. Given the user is on the customer account page
+When I choose to sign up
+And enter my details, including email and password
+Then I can read and  update my details, and log in in future.
+
+5. Given the user is on the menu page
+When scrolling
+Then I can see a list of all available items, their name and price (and ingriedients if time to add)
+
+6. Given the user is on the My Orders page
+When viewing
+Then I can see my previous orders and update them.
+
+STAFF SIDE
+1. Given the user is taken to the Inventory Menu page
+When entering the corresponding shortcut
+Then I can create, read, update and delete the entries.
+
+2. Given the user is taken to the Customers page
+When entering the corresponding shortcut and customer id
+Then I can create, read, update and delete the entries. As well as seeing a customers orders.
+
+3. Given the user is taken to the Orders page
+When entering the corresponding shortcut
+Then I can create, read, update and delete the entries. As well as updating the items in an order.
