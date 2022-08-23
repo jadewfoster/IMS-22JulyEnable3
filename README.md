@@ -5,8 +5,6 @@ Using the given project template, the code has been altered and expanded so as t
 
 Jira was used to create a Scrum board, as shown below:
 
-https://jadewfoster.atlassian.net/jira/software/projects/J3PROJ/boards/2/roadmap
-
 <img src="/documentation/screenshots/jira-scrum-board" alt="Jira Scrum Board" style ="width:128px;height:128px;">
 
 ## Getting Started
