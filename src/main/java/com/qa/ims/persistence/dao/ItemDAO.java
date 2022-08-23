@@ -85,7 +85,12 @@ public class ItemDAO implements Dao<Item> {
         }
         return null;
     }
-
+    /**
+     * Finds an item in the database
+     * 
+     * @param id - takes in a item object.
+     */
+    @Override
     public Item read(Long id) {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE item_id = ?");) {
@@ -129,7 +134,7 @@ public class ItemDAO implements Dao<Item> {
     /**
      * Deletes an item in the database
      * 
-     * @param id - id of the customer
+     * @param id - id of the item
      */
     @Override
     public int delete(long id) {
