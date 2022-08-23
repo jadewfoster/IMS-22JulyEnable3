@@ -67,7 +67,7 @@ public class ItemController implements CrudController<Item> {
 		double price = utils.getDouble();
 		LOGGER.info("Please enter the stock of the item");
 		Integer stock = utils.getInteger();;
-		Item item = itemDAO.update(new Item(itemName, price, stock));
+		Item item = itemDAO.update(new Item(item_id, itemName, price, stock));
 		LOGGER.info("Item has been updated successfully.");
 		return item;
 	}
