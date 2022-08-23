@@ -51,7 +51,7 @@ public enum Action {
 			try {
 				action = Action.valueOf(utils.getString().toUpperCase());
 			} catch (IllegalArgumentException e) {
-				LOGGER.error("Invalid selection please try again");
+				LOGGER.error("Invalid selection, please try again");
 			}
 		} while (action == null);
 		return action;
