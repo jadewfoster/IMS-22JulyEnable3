@@ -22,7 +22,6 @@ public class OrderDAO implements Dao<Order> {
     public Order modelFromResultSet(ResultSet resultSet) throws SQLException {
         Long order_id = resultSet.getLong("order_id");
         Long id = resultSet.getLong("fk_customer_id");
-        int quantity = resultSet.getInt("quantity");
         return new Order(order_id, id);
     }
 
@@ -47,12 +46,11 @@ public class OrderDAO implements Dao<Order> {
             while (resultSet.next()) {
                 orders.add(modelFromResultSet(resultSet));
                 LOGGER.info(
-                		"Order ID: " + resultSet.getLong("o.order_id") + 
-                		"Customer name: " + resultSet.getString("c.first_name") + " " + resultSet.getString("c.surname") + 
-                        "Item ID: " + resultSet.getLong("i.item_id") + 
-                        "Item Name: " + resultSet.getString("i.item_name") + 
-                        "Price: " + resultSet.getDouble("i.item_price") + 
-                        "Quantity: " + resultSet.getInt("oi.quantity"));
+                		"\n	Order ID: " + resultSet.getLong("o.order_id") + 
+                		"\n	Customer Name: " + resultSet.getString("c.first_name") + " " + resultSet.getString("c.surname") +  
+                        "\n	Item Name: " + resultSet.getString("i.item_name") + 
+                        "\n	Price: " + resultSet.getDouble("i.item_price") + 
+                        "\n	Quantity: " + resultSet.getInt("oi.quantity") + "\n");
             }
         } catch (SQLException e) {
             LOGGER.debug(e);
@@ -69,7 +67,7 @@ public class OrderDAO implements Dao<Order> {
                         "WHERE items.item_id=orders_items.fk_item_id;");) {
             while (resultSet.next()) {
                 orders.add(total(resultSet));
-                LOGGER.info("Total cost of order: " + resultSet.getDouble("TotalPrice") + "and Corresponding ID: " + resultSet.getLong("CorrespondingID"));
+                LOGGER.info("	Order ID: "+ resultSet.getLong("CorrespondingID") + ", 	Total price of order: " + resultSet.getDouble("TotalPrice") );
             }
         } catch (SQLException e) {
         	LOGGER.error(e.getMessage());
@@ -81,15 +79,16 @@ public class OrderDAO implements Dao<Order> {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");) {
-            resultSet.next();
+        		resultSet.next();
             return modelFromResultSet(resultSet);
         } catch (Exception e) {
             LOGGER.debug(e);
             LOGGER.error(e.getMessage());
         }
-        return null;
+		return null;
     }
 
+    
     /**
      * Creates an order in the database
      * 
@@ -111,10 +110,11 @@ public class OrderDAO implements Dao<Order> {
                 PreparedStatement statement2 = connection
                         .prepareStatement(
                                 "INSERT INTO orders_items(fk_order_id, fk_item_id, quantity) VALUES (?, ?, ?)");) {
-            statement2.setLong(1, readLatest().getOrder_id());
+        	statement2.setLong(1, readLatest().getOrder_id());
         	statement2.setLong(2, order.getItem_id());
             statement2.setInt(3, order.getQuantity());
             statement2.executeUpdate();
+            LOGGER.info(readLatest());
             return readLatest();
         } catch (Exception e) {
             LOGGER.debug(e);

@@ -35,12 +35,12 @@ public class IMS {
 	}
 
 	public void imsSystem() {
-		LOGGER.info("Welcome to the Inventory Management System!");
+		LOGGER.info("--------------------Welcome to the Cocktail Bar's Inventory Management System!--------------------");
 		DBUtils.connect();
 
 		Domain domain = null;
 		do {
-			LOGGER.info("Which entity would you like to use?");
+			LOGGER.info("----------------------------------------Choose a function-----------------------------------------");
 			Domain.printDomains();
 
 			domain = Domain.getDomain(utils);
@@ -71,7 +71,7 @@ public class IMS {
 				break;
 			}
 
-			LOGGER.info(() ->"What would you like to do with " + domain.name().toLowerCase() + ":");
+			LOGGER.info(() ->"--------------------------------------------------------------------------------------------------\n Choose an action to perform on " + domain.name().toLowerCase() + ":");
 
 			Action.printActions();
 			Action action = Action.getAction(utils);

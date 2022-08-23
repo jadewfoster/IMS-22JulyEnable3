@@ -32,6 +32,7 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public List<Order> readAll() {
 		List<Order> orders = orderDAO.readAll();
+		LOGGER.info("--------------------------------------------------------------------------------------------------");
 		for (Order order : orders) {
 			LOGGER.info(order);
 		}
@@ -43,14 +44,15 @@ public class OrderController implements CrudController<Order> {
 	 */
 	@Override
 	public Order create() {
-		LOGGER.info("Please enter the customer ID you would like the order to belong to:");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please enter the customer ID you would like the order to belong to:");
 		Long id = utils.getLong();
 		LOGGER.info("Please enter the item ID you want to add to the order:");
 		Long item_id = utils.getLong();
 		LOGGER.info("Please enter the quantity of this item:");
 		Integer quantity = utils.getInteger();
 		Order order = orderDAO.create(new Order(id, item_id, quantity));
-		LOGGER.info("Order has been created successfully!");
+		LOGGER.info("------------------------------Order has been created successfully!------------------------------");
 		return order;
 	}
 
@@ -59,14 +61,15 @@ public class OrderController implements CrudController<Order> {
 	 */
 	@Override
 	 public Order update() {
-        LOGGER.info("Please enter the order ID you would like to update:");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please enter the order ID you would like to update:");
         long order_id = utils.getLong();
         LOGGER.info("Please enter the item ID you would like to add to the order:");
         long item_id = utils.getLong();
         LOGGER.info("Please enter the quantity of this item you would like to add:");
         int quantity = utils.getInteger();
         Order addItem = orderDAO.update(new Order(order_id, item_id, quantity));
-        LOGGER.info("Order has been updated successfully!");
+        LOGGER.info("------------------------------Order has been updated successfully!------------------------------");
         return addItem;
     }
 
@@ -77,7 +80,8 @@ public class OrderController implements CrudController<Order> {
 	 */
 	@Override
 	public int delete() {
-        LOGGER.info("Please select whether you would like to delete the entire order, or an item from the order");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please select whether you would like to delete the entire order, or an item from the order");
         LOGGER.info("DEL ORDER/DEL ITEM");
         String action = utils.getString();
         action = action.toUpperCase();
@@ -85,20 +89,22 @@ public class OrderController implements CrudController<Order> {
         
         
             case "DEL ORDER":
-                LOGGER.info("Please enter the order id of the order you would like to delete:");
+                LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+                		+ "Please enter the order id of the order you would like to delete:");
                 Long order_id = utils.getLong();
                 orderDAO.delete(order_id);
-                LOGGER.info("Order has successfully been deleted!");
+                LOGGER.info("------------------------------Order has successfully been deleted!------------------------------");
                 break;
                 
                 
             case "DEL ITEM":
-                LOGGER.info("Please enter the order id you would like to delete an item from:");
+            	LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+        				+ "Please enter the order id you would like to delete an item from:");
                 Long order_id2 = utils.getLong();
                 LOGGER.info("Please enter the item id you would like to delete from the order:");
                 Long item_id = utils.getLong();
                 orderDAO.itemDelete(order_id2, item_id);
-                LOGGER.info("Item from order has successfully been deleted!");
+                LOGGER.info("------------------------------Item from order has successfully been deleted!------------------------------");
                 break;
                 
                 

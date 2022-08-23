@@ -122,8 +122,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [order_id=" + order_id + ", totalPrice=" + totalPrice + ", id=" + id + ", quantity=" + quantity
-				+ ", item_id=" + item_id + ", items=" + items + "]";
+		return "\n	Order ID: " + order_id + "\n	Total Price: " + totalPrice + "\n	Customer ID: " + id + "\n	Quantity: " + quantity
+				+ "\n	Item ID: " + item_id + "\n	Items: " + items + "\n";
 	}
 
 

@@ -32,6 +32,7 @@ public class ItemController implements CrudController<Item> {
 	@Override
 	public List<Item> readAll() {
 		List<Item> items = itemDAO.readAll();
+		LOGGER.info("--------------------------------------------------------------------------------------------------");
 		for (Item item : items) {
 			LOGGER.info(item);
 		}
@@ -43,14 +44,16 @@ public class ItemController implements CrudController<Item> {
 	 */
 	@Override
 	public Item create() {
-		LOGGER.info("Please enter an item name:");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please enter an item name:");
 		String itemName = utils.getString();
 		LOGGER.info("Please enter an item price:");
 		double price = utils.getDouble();
 		LOGGER.info("Please enter the stock of the item");
 		Integer stock = utils.getInteger();
 		Item item = itemDAO.create(new Item(itemName, price, stock));
-		LOGGER.info("Item has been created successfully.");
+		LOGGER.info("------------------------------Item has been created successfully.------------------------------");
+		LOGGER.info(itemDAO.readLatest());
 		return item;
 	}
 
@@ -59,7 +62,8 @@ public class ItemController implements CrudController<Item> {
 	 */
 	@Override
 	public Item update() {
-		LOGGER.info("Please enter the id of the item you would like to update:");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please enter the id of the item you would like to update:");
 		Long item_id = utils.getLong();
 		LOGGER.info("Please enter an item name:");
 		String itemName = utils.getString();
@@ -68,7 +72,8 @@ public class ItemController implements CrudController<Item> {
 		LOGGER.info("Please enter the stock of the item");
 		Integer stock = utils.getInteger();;
 		Item item = itemDAO.update(new Item(item_id, itemName, price, stock));
-		LOGGER.info("Item has been updated successfully.");
+		LOGGER.info("------------------------------Item has been updated successfully.------------------------------");
+		LOGGER.info("The new entry is: \n" + itemDAO.read(item_id));
 		return item;
 	}
 
@@ -79,8 +84,10 @@ public class ItemController implements CrudController<Item> {
 	 */
 	@Override
 	public int delete() {
-		LOGGER.info("Please enter the id of the item you would like to delete:");
+		LOGGER.info("--------------------------------------------------------------------------------------------------\n"
+				+ "Please enter the id of the item you would like to delete:");
 		Long item_id = utils.getLong();
+		LOGGER.info("------------------------------Item has been deleted successfully.------------------------------");
 		return itemDAO.delete(item_id);
 	}
 
