@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ import com.qa.ims.utils.DBUtils;
 public class OrderDAO implements Dao<Order> {
 
     public static final Logger LOGGER = LogManager.getLogger();
-
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    
     @Override
     public Order modelFromResultSet(ResultSet resultSet) throws SQLException {
         Long order_id = resultSet.getLong("order_id");
@@ -62,12 +64,18 @@ public class OrderDAO implements Dao<Order> {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(
-                        "SELECT items.item_price*orders_items.quantity as TotalPrice, fk_order_id as CorrespondingID " +
-                        "FROM items, orders_items " +
-                        "WHERE items.item_id=orders_items.fk_item_id;");) {
+                        "SELECT order_id, SUM(quantity*item_price) as TotalPrice"
+                        		+ " FROM orders o"
+                                + " INNER JOIN orders_items oi"
+                                + " ON o.order_id = oi.fk_order_id"
+                                + " INNER JOIN items i"
+                                + " ON i.item_id = fk_item_id"
+                                + " INNER JOIN customers c"
+                                + " ON o.fk_customer_id = c.id"
+                                + " GROUP BY order_id;");){
             while (resultSet.next()) {
                 orders.add(total(resultSet));
-                LOGGER.info("	Order ID: "+ resultSet.getLong("CorrespondingID") + ", 	Total price of order: " + resultSet.getDouble("TotalPrice") );
+                LOGGER.info("	Order ID: "+ resultSet.getLong("order_id") + " -> Total price: £" + df.format(resultSet.getDouble("TotalPrice")) );
             }
         } catch (SQLException e) {
         	LOGGER.error(e.getMessage());
@@ -94,33 +102,29 @@ public class OrderDAO implements Dao<Order> {
      * 
      * @param order - takes in a order object. id will be ignored
      */
+    
+    
     @Override
     public Order create(Order order) {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement(
-                                "INSERT INTO orders(fk_customer_id) VALUES (?)");) {
-            statement.setLong(1, order.getId());
+                                "INSERT INTO orders(fk_customer_id) VALUES (?)" +
+                        		"SELECT order_id INTO @newid FROM orders WHERE fk_customer_id = ? " +
+                                "ORDER BY order_id DESC LIMIT 1;" +
+                                "INSERT INTO orders_items(fk_order_id, fk_item_id, quantity) VALUES (@newid, ?, ?);");) {
+        	statement.setLong(1, order.getId());
+        	statement.setLong(2, order.getId());
+        	statement.setLong(3, order.getItem_id());
+            statement.setInt(4, order.getQuantity());
             statement.executeUpdate();
-        } catch (Exception e) {
-            LOGGER.debug(e);
-            LOGGER.error(e.getMessage());
-        }
-        try (Connection connection = DBUtils.getInstance().getConnection();
-                PreparedStatement statement2 = connection
-                        .prepareStatement(
-                                "INSERT INTO orders_items(fk_order_id, fk_item_id, quantity) VALUES (?, ?, ?)");) {
-        	statement2.setLong(1, readLatest().getOrder_id());
-        	statement2.setLong(2, order.getItem_id());
-            statement2.setInt(3, order.getQuantity());
-            statement2.executeUpdate();
             LOGGER.info(readLatest());
-            return readLatest();
+            return order;
         } catch (Exception e) {
             LOGGER.debug(e);
             LOGGER.error(e.getMessage());
         }
-        return null;
+        return order;
     }
 
     @Override
@@ -132,7 +136,8 @@ public class OrderDAO implements Dao<Order> {
                 "INNER JOIN orders_items oi" + 
                 "ON o.order_id=oi.fk_order_id" + 
                 "INNER JOIN items i" + 
-                "ON i.item_id=fk_item_id");) {
+                "ON i.item_id=fk_item_id" +
+                "WHERE order_id = (?)");) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery();) {
                 resultSet.next();
@@ -161,14 +166,14 @@ public class OrderDAO implements Dao<Order> {
      * @return
      */
     @Override
-    public Order update(Order o) {
+    public Order update(Order order) {
         try (Connection connection = DBUtils.getInstance().getConnection();
                 PreparedStatement statement2 = connection
                         .prepareStatement(
                                 "INSERT INTO orders_items(fk_order_id, fk_item_id, quantity) VALUES (?, ?, ?)");) {
-            statement2.setLong(1, o.getOrder_id());
-        	statement2.setLong(2, o.getItem_id());
-            statement2.setInt(3, o.getQuantity());
+            statement2.setLong(1, order.getOrder_id());
+        	statement2.setLong(2, order.getItem_id());
+            statement2.setInt(3, order.getQuantity());
             statement2.executeUpdate();
             return readLatest();
         } catch (Exception e) {

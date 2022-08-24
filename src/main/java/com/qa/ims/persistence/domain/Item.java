@@ -76,6 +76,11 @@ public class Item {
 		return Objects.equals(itemName, other.itemName) && Objects.equals(item_id, other.item_id)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price) && stock == other.stock;
 	}
+
+	public Integer getCost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
