@@ -68,7 +68,7 @@ public class OrderController implements CrudController<Order> {
         long item_id = utils.getLong();
         LOGGER.info("Please enter the quantity of this item you would like to add:");
         int quantity = utils.getInteger();
-        Order addItem = orderDAO.update(new Order(order_id, item_id, quantity));
+        Order addItem = orderDAO.update(new Order(quantity, order_id, item_id));
         LOGGER.info("------------------------------Order has been updated successfully!------------------------------");
         return addItem;
     }
