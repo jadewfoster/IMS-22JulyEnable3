@@ -99,14 +99,14 @@ We take an assertion and expectation statement for each element of the code.
 
 For example, to test the create an order method:
 
-<code>
+```
 		@Test
 		public void testCreate() {
 			final Order created = new Order(2L, 2L, 1);
 			assertEquals(created, DAO.create(created));
 		}
 
-</code>
+```
 
 
 ### Integration Tests 
@@ -115,7 +115,7 @@ Mockito is used for integration testing, and it allows for more complex and thor
 
 For example, to test the create an order method:
 
-<code>
+```
 		@Test
 		public void testCreate() {
 			final long id = 1L;
@@ -130,8 +130,7 @@ For example, to test the create an order method:
 
 			assertEquals(created, controller.create());
 		}
-</code>
-
+```
 
 ### Coding style tests
 
