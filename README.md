@@ -99,14 +99,14 @@ We take an assertion and expectation statement for each element of the code.
 
 For example, to test the create an order method:
 
-'''
-	@Test
-	public void testCreate() {
-		final Order created = new Order(2L, 2L, 1);
-		assertEquals(created, DAO.create(created));
-	}
+<code>
+		@Test
+		public void testCreate() {
+			final Order created = new Order(2L, 2L, 1);
+			assertEquals(created, DAO.create(created));
+		}
 
-''
+</code>
 
 
 ### Integration Tests 
@@ -116,21 +116,20 @@ Mockito is used for integration testing, and it allows for more complex and thor
 For example, to test the create an order method:
 
 <code>
-	@Test
-	public void testCreate() {
-		final long id = 1L;
-		final long item_id = 1L;
-		final Integer quantity = 1;
-		
-		final Order created = new Order(id, item_id, quantity);
+		@Test
+		public void testCreate() {
+			final long id = 1L;
+			final long item_id = 1L;
+			final Integer quantity = 1;
+			final Order created = new Order(id, item_id, quantity);
 
-		Mockito.when(utils.getLong()).thenReturn(id);
-		Mockito.when(utils.getLong()).thenReturn(item_id);
-		Mockito.when(utils.getInteger()).thenReturn(quantity);
-		Mockito.when(dao.create(created)).thenReturn(created);
+			Mockito.when(utils.getLong()).thenReturn(id);
+			Mockito.when(utils.getLong()).thenReturn(item_id);
+			Mockito.when(utils.getInteger()).thenReturn(quantity);
+			Mockito.when(dao.create(created)).thenReturn(created);
 
-		assertEquals(created, controller.create());
-	}
+			assertEquals(created, controller.create());
+		}
 </code>
 
 
