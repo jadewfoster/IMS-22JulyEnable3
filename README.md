@@ -40,7 +40,7 @@ When you have everything installed, fork the repo and open the project in Eclips
 
 The application has 3 entities of customer, item and order. On the launch screen, these entities can be manipulated via user input "customer", "order" or "item"
 
-Customer:
+**Customer:**
 
 Create -> Asks for name and surname, then adds entry to the database
 
@@ -52,7 +52,7 @@ Delete -> Asks for customer id, then deletes customer from database.
 
 Return -> Returns user back to main menu
 
-Item
+**Item:**
 
 Create -> Asks for item name, price and stock, then adds entry to the database
 
@@ -64,7 +64,7 @@ Delete -> Asks for item id, then deletes item from database.
 
 Return -> Returns user back to main menu
 
-Order
+**Order:**
 
 Create -> Asks for customer id, item id and quantity, then adds entry to the database
 
@@ -82,6 +82,7 @@ Stop -> Closes the application
 ## Running the tests
 
 There are tests for each of:
+
 Customer, Item, Order
 
 CustomerDAO, ItemDAO, OrderDAO
@@ -114,7 +115,7 @@ Mockito is used for integration testing, and it allows for more complex and thor
 
 For example, to test the create an order method:
 
-'''
+<code>
 	@Test
 	public void testCreate() {
 		final long id = 1L;
@@ -130,7 +131,7 @@ For example, to test the create an order method:
 
 		assertEquals(created, controller.create());
 	}
-'''
+</code>
 
 
 ### Coding style tests
