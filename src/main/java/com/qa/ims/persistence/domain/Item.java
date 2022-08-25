@@ -22,6 +22,10 @@ public class Item {
 		this.setStock(stock);
 	}
 
+	public Item(long item_id){
+		this.setItem_id(item_id);
+	}
+
 	public Long getItem_id() {
 		return item_id;
 	}

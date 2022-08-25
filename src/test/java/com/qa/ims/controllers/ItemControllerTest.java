@@ -44,7 +44,9 @@ public class ItemControllerTest {
 
 		assertEquals(created, controller.create());
 
-		Mockito.verify(utils, Mockito.times(2)).getString();
+		Mockito.verify(utils, Mockito.times(1)).getString();
+		Mockito.verify(utils, Mockito.times(1)).getDouble();
+		Mockito.verify(utils, Mockito.times(1)).getInteger();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
 	}
 
@@ -62,31 +64,33 @@ public class ItemControllerTest {
 
 	@Test
 	public void testUpdate() {
-		Item updated = new Item("Drink", 10.00, 100);
+		Item updated = new Item(1L, "Drink", 10.00, 100);
 
-		Mockito.when(this.utils.getString()).thenReturn("Drink");
-		Mockito.when(utils.getDouble()).thenReturn(10.00);
-		Mockito.when(utils.getInteger()).thenReturn(100);
+		Mockito.when(this.utils.getLong()).thenReturn(1L);
+		Mockito.when(this.utils.getString()).thenReturn(updated.getItemName());
+		Mockito.when(utils.getDouble()).thenReturn(updated.getPrice());
+		Mockito.when(utils.getInteger()).thenReturn(updated.getStock());
 		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 		
 		assertEquals(updated, this.controller.update());
 
 		Mockito.verify(this.utils, Mockito.times(1)).getLong();
-		Mockito.verify(this.utils, Mockito.times(2)).getDouble();
-		Mockito.verify(this.utils, Mockito.times(3)).getInteger();
+		Mockito.verify(this.utils, Mockito.times(1)).getString();
+		Mockito.verify(this.utils, Mockito.times(1)).getDouble();
+		Mockito.verify(this.utils, Mockito.times(1)).getInteger();
 		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
 	}
 
 	@Test
 	public void testDelete() {
-		final Integer item_id = 1;
+		final long item_id = 1L;
 
-		Mockito.when(utils.getInteger()).thenReturn(item_id);
+		Mockito.when(utils.getLong()).thenReturn(item_id);
 		Mockito.when(dao.delete(item_id)).thenReturn(1);
 
 		assertEquals(1, this.controller.delete());
 
-		Mockito.verify(utils, Mockito.times(1)).getInteger();
+		Mockito.verify(utils, Mockito.times(1)).getLong();
 		Mockito.verify(dao, Mockito.times(1)).delete(item_id);
 	}
 
