@@ -127,7 +127,4 @@ public class Order {
 				+ "\n	Item ID: " + item_id + "\n	Items: " + items + "\n";
 	}
 
-
-
-
 }

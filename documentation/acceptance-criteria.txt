@@ -1,55 +1,72 @@
 ACCEPTANCE CRITERIA
 
-1. Given the user is on the main page
-When I enter the shortcut key
-And press enter
-Then it takes me to the relevant page
+1. Given the user is on the main page,
+When I enter the shortcut word,
+And press enter,
+Then it takes me to the relevant page.
 
-2. Given the user is on any page
-When I enter q
-Then I exit the program
+2. Given the user is on a page,
+When I enter STOP,
+Then I exit the program.
 
-3. Given the user is on a page
-When I enter m
-Then I exit back to the main menu
+3. Given the user is on a page,
+When I enter RETURN,
+Then I exit back to the main menu.
 
+-------------------------
 
-CUSTOMER SIDE
-1. Given the user is taken to the make orders page
-When I select the items I would like in my order
-Then it displays the total cost
-
-2. Given the user is taken to the make orders page
-When I confirm my order
-Then it displays "Order successful"
-
-3. Given the user is on the customer account page
-When I choose to sign in
-And enter my login details
-Then I can read and update my details
-
-4. Given the user is on the customer account page
-When I choose to sign up
-And enter my details, including email and password
-Then I can read and  update my details, and log in in future.
-
-5. Given the user is on the menu page
-When scrolling
-Then I can see a list of all available items, their name and price (and ingriedients if time to add)
-
-6. Given the user is on the My Orders page
-When viewing
-Then I can see my previous orders and update them.
-
-STAFF SIDE
-1. Given the user is taken to the Inventory Menu page
-When entering the corresponding shortcut
+1. Given the user is taken to the Item page,
+When entering the corresponding shortcut,
 Then I can create, read, update and delete the entries.
 
-2. Given the user is taken to the Customers page
-When entering the corresponding shortcut and customer id
+2. Given the user creates a new item,
+When entering the item name, price and stock,
+Then the inventory of items is updated with this item.
+
+3. Given the user reads items,
+When entering READ,
+Then all items and characteristics are printed.
+
+4. Given the user deletes an item,
+When confirming the item id,
+Then the item is deleted from the inventory.
+
+--------------------------
+
+1. Given the user is taken to the Customer page,
+When entering the corresponding shortcut and customer id,
 Then I can create, read, update and delete the entries. As well as seeing a customers orders.
 
-3. Given the user is taken to the Orders page
-When entering the corresponding shortcut
+2. Given the user creates a new customer,
+When entering the first name and surname,
+Then the inventory of customers is updated with this item.
+
+3. Given the user reads customers,
+When entering READ,
+then all customers are printed.
+
+4. Given the user deletes a customer,
+When confirming the customer id,
+Then the customer is deleted from the inventory.
+
+-------------------------
+
+1. Given the user is taken to the Order page,
+When entering the corresponding shortcut,
 Then I can create, read, update and delete the entries. As well as updating the items in an order.
+
+2. Given the user enters a new order,
+When entering the corresponding customer id, item id and quantity,
+Then the inventory of orders and orders_items is updated with this item.
+
+3. Given the user reads orders,
+When entering READ,
+Then all orders and their items are printed, as well as the total cost of each order.
+
+4. Given the user deletes an order,
+When confirming the order id,
+Then the order and it's child orders_items are deleted from the inventory.
+
+5. Given the user deletes an item from an order,
+When confirming the order id and the item id,
+Then the item is deleted from the order inventory.

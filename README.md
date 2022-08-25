@@ -1,7 +1,7 @@
 Coverage: xx%
-# Bar Delivery Service - Inventory Management System (IMS)
+# Inventory Management System (IMS) for a Cocktail Bar
 
-Using the given project template, the code has been altered and expanded so as to provide a fully functional command line interface that can be used by both customers and staff. The context is a bar delivery service, which allows customers to make an account, and create an order composed of several drinks in the bars inventory such as cocktails, beer, cider, wine etc. This order connects to the staff interface of the application, which allows them to update their menu, view orders, take payment, etc. Therefore this application provides the medium for the bar to take online orders for delivery, as well as for the customers to place them.
+Using the given project template, the code has been altered and expanded so as to provide a fully functional command line interface that can be used by staff. The context is a bar service, which allows customers to make an account, and create an order composed of several drinks in the bars inventory such as cocktails, beer, cider, wine etc. This order connects to the staff interface of the application, which allows them to update their menu, view orders, take payment, etc. Therefore this application provides the medium for the bar to take online orders from customers, and also to keep stock of their current inventory and menu.
 
 Jira was used to create a Scrum board, as shown below:
 
@@ -15,63 +15,76 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-Java
-Maven
-JUnit
+To run the project you need to install the following:
+* Java 18
+* Maven (as build tool)
+* IDE such as IntelliJ, VScode or Eclipse (which was used for this project)
+* JUnit
+* mySQL (to interact with the database and use the schema given in the resources section of the project)
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+A step by step series of examples that tell you how to get a development env running:
 
-Say what the step will be
+* Download JDK (Java Development Kit) from the Oracle website (https://www.oracle.com/java/technologies/javase/jdk14-archive-downloads.html) 
+* Setup env variables JAVA_HOME with PATH file appended with %JAVA_HOME%/bin
+* Install Eclipse IDE for Java Developers (https://www.eclipse.org/downloads/packages/)
+* Install Maven (https://maven.apache.org/download.cgi)
+* Setup env variables MAVEN_HOME with PATH file appended with %MAVEN_HOME%/bin
+* Install mySQL (https://dev.mysql.com/downloads/windows/installer/8.0.html), preferably with password 'pass'
 
-```
-Give the example
-```
+When you have everything installed, fork the repo and open the project in Eclipse, updating db.properties with your connection info from your mySQL server. 
 
-And repeat
+## Using the application
 
-```
-until finished
-```
+The application has 3 entities of customer, item and order. On the launch screen, these entities can be manipulated via user input "customer", "order" or "item"
 
-End with an example of getting some data out of the system or using it for a little demo
+Customer:
+Create -> Asks for name and surname, then adds entry to the database
+Read -> Displays all customers in database
+Update -> Asks for customer id, new name and new surname, then updates entry in the database.
+Delete -> Asks for customer id, then deletes customer from database.
+Return -> Returns user back to main menu
+
+Item
+Create -> Asks for item name, price and stock, then adds entry to the database
+Read -> Displays all items in database
+Update -> Asks for item id, new item name, new price and new stock, then updates entry in the database.
+Delete -> Asks for item id, then deletes item from database.
+Return -> Returns user back to main menu
+
+Order
+Create -> Asks for customer id, item id and quantity, then adds entry to the database
+Read -> Displays all orders in database
+Update -> Asks for order id, new item id and quantity, then updates entry in the database.
+Delete -> Asks for order id, then deletes order from database OR asks for order id and item id, then deletes item from order in database.
+Return -> Returns user back to main menu
+
+Stop -> Closes the application
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+Explain how to run the automated tests for this system. 
+Break down into which tests and what they do
 
 ### Unit Tests 
 
 Explain what these tests test, why and how to run them
 
-```
-Give an example
-```
 
 ### Integration Tests 
 Explain what these tests test, why and how to run them
 
-```
-Give an example
-```
 
-### And coding style tests
+### Coding style tests
 
 Explain what these tests test and why
 
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To deploy this on a live system, in the sql-schema file, remove drop schema 'ims', therefore data will be maintained across several people accessing the system, rather than being reset each time someone new accesses it.
 
 ## Built With
 
