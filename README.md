@@ -36,6 +36,11 @@ A step by step series of examples that tell you how to get a development env run
 
 When you have everything installed, fork the repo and open the project in Eclipse, updating db.properties with your connection info from your mySQL server. 
 
+You can also use this program in the command line, by using git bash where the ims-0.0.1-jar-with-dependencies.jar file is located.
+Type "java -jar ims-0.0.1-jar-with-dependencies.jar" and the program will run as shown:
+
+<img src="/documentation/screenshots/command-line-wow-it-works" alt="Running in Command Line" style ="width:128px;height:128px;">
+
 ## Using the application
 
 The application has 3 entities of customer, item and order. On the launch screen, these entities can be manipulated via user input "customer", "order" or "item"
