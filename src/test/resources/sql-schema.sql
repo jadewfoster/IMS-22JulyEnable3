@@ -1,5 +1,3 @@
-drop schema ims;
-
 CREATE SCHEMA IF NOT EXISTS ims;
 USE ims ;
 

@@ -37,9 +37,9 @@ public class OrderDAO implements Dao<Order> {
 		List<Order> orders = new ArrayList<>();
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders o" + " INNER JOIN orders_items oi"
-						+ " ON o.order_id = oi.fk_order_id" + " INNER JOIN items i" + " ON i.item_id = fk_item_id"
-						+ " INNER JOIN customers c" + " ON o.fk_customer_id = c.id");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM ims.orders o" + " INNER JOIN ims.orders_items oi"
+						+ " ON o.order_id = oi.fk_order_id" + " INNER JOIN ims.items i" + " ON i.item_id = fk_item_id"
+						+ " INNER JOIN ims.customers c" + " ON o.fk_customer_id = c.id");) {
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
 				LOGGER.info("\n	Order ID: " + resultSet.getLong("o.order_id") + "\n	Customer Name: "
@@ -57,8 +57,8 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT order_id, SUM(quantity*item_price) as TotalPrice"
-						+ " FROM orders o" + " INNER JOIN orders_items oi" + " ON o.order_id = oi.fk_order_id"
-						+ " INNER JOIN items i" + " ON i.item_id = fk_item_id" + " INNER JOIN customers c"
+						+ " FROM ims.orders o" + " INNER JOIN ims.orders_items oi" + " ON o.order_id = oi.fk_order_id"
+						+ " INNER JOIN ims.items i" + " ON i.item_id = fk_item_id" + " INNER JOIN ims.customers c"
 						+ " ON o.fk_customer_id = c.id" + " GROUP BY order_id;");) {
 			while (resultSet.next()) {
 				orders.add(total(resultSet));
@@ -74,9 +74,9 @@ public class OrderDAO implements Dao<Order> {
 	public Order readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders o" + " INNER JOIN orders_items oi"
-						+ " ON o.order_id = oi.fk_order_id" + " INNER JOIN items i" + " ON i.item_id = fk_item_id"
-						+ " INNER JOIN customers c" + " ON o.fk_customer_id = c.id ORDER BY order_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM ims.orders o" + " INNER JOIN ims.orders_items oi"
+						+ " ON o.order_id = oi.fk_order_id" + " INNER JOIN ims.items i" + " ON i.item_id = fk_item_id"
+						+ " INNER JOIN ims.customers c" + " ON o.fk_customer_id = c.id ORDER BY order_id DESC LIMIT 1");) {
 			resultSet.next();
 			LOGGER.info("\n	Order ID: " + resultSet.getLong("o.order_id") + "\n	Customer Name: "
 					+ resultSet.getString("c.first_name") + " " + resultSet.getString("c.surname")
@@ -100,12 +100,12 @@ public class OrderDAO implements Dao<Order> {
 	public Order create(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection()) {
 			try (PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO orders(fk_customer_id) VALUES (?)")) {
+					.prepareStatement("INSERT INTO ims.orders(fk_customer_id) VALUES (?)")) {
 				statement.setLong(1, order.getId());
 				statement.executeUpdate();
 			}
 			try (PreparedStatement statement = connection.prepareStatement(
-					"SELECT order_id INTO @newid FROM orders WHERE fk_customer_id = ? ORDER BY order_id DESC LIMIT 1")) {
+					"SELECT order_id INTO @newid FROM ims.orders WHERE fk_customer_id = ? ORDER BY order_id DESC LIMIT 1")) {
 				statement.setLong(1, order.getId());
 				statement.executeQuery();
 			}
@@ -129,8 +129,8 @@ public class OrderDAO implements Dao<Order> {
 	public Order read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"SELECT * FROM orders o" + "INNER JOIN orders_items oi" + "ON o.order_id=oi.fk_order_id"
-								+ "INNER JOIN items i" + "ON i.item_id=fk_item_id" + "WHERE order_id = (?)");) {
+						"SELECT * FROM ims.orders o" + "INNER JOIN ims.orders_items oi" + "ON o.order_id=oi.fk_order_id"
+								+ "INNER JOIN ims.items i" + "ON i.item_id=fk_item_id" + "WHERE order_id = (?)");) {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -162,7 +162,7 @@ public class OrderDAO implements Dao<Order> {
 	public Order update(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement2 = connection.prepareStatement(
-						"INSERT INTO orders_items(fk_order_id, fk_item_id, quantity) VALUES (?, ?, ?)");) {
+						"INSERT INTO ims.orders_items(fk_order_id, fk_item_id, quantity) VALUES (?, ?, ?)");) {
 			statement2.setLong(1, order.getOrder_id());
 			statement2.setLong(2, order.getItem_id());
 			statement2.setInt(3, order.getQuantity());
@@ -185,7 +185,7 @@ public class OrderDAO implements Dao<Order> {
 
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("DELETE FROM orders_items WHERE fk_order_id = ?");) {
+						.prepareStatement("DELETE FROM ims.orders_items WHERE fk_order_id = ?");) {
 			statement.setLong(1, order_id);
 			statement.executeUpdate();
 		} catch (Exception e) {
@@ -193,7 +193,7 @@ public class OrderDAO implements Dao<Order> {
 			LOGGER.error(e.getMessage());
 		}
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE order_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM ims.orders WHERE order_id = ?");) {
 			statement.setLong(1, order_id);
 			statement.executeUpdate();
 		} catch (Exception e) {

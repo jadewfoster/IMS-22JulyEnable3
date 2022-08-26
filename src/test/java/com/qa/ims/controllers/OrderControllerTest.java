@@ -1,11 +1,17 @@
 package com.qa.ims.controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,7 +50,7 @@ public class OrderControllerTest {
 
 		assertEquals(created, controller.create());
 
-//		Mockito.verify(utils, Mockito.times(1)).getLong();
+		Mockito.verify(utils, Mockito.times(1)).getInteger();
 //		Mockito.verify(utils, Mockito.times(1)).getLong();
 //		Mockito.verify(utils, Mockito.times(1)).getInteger();
 //		Mockito.verify(dao, Mockito.times(1)).create(created);
@@ -65,11 +71,11 @@ public class OrderControllerTest {
 	@Test
 	public void testUpdate() {
 		Order updated = new Order(1L, 1L, 1);
-
-		Mockito.when(this.utils.getLong()).thenReturn(1L);
-		Mockito.when(this.utils.getLong()).thenReturn(1L);
-		Mockito.when(this.utils.getInteger()).thenReturn(updated.getQuantity());
-		Mockito.when(this.dao.update(updated)).thenReturn(updated);
+		assertEquals(null, this.controller.update());
+//		Mockito.when(this.utils.getLong()).thenReturn(1L);
+//		Mockito.when(this.utils.getLong()).thenReturn(1L);
+//		Mockito.when(this.utils.getInteger()).thenReturn(updated.getQuantity());
+//		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 		
 //		assertEquals(updated, this.controller.update());
 
@@ -78,32 +84,27 @@ public class OrderControllerTest {
 //		Mockito.verify(this.dao, Mockito.times(3)).update(updated);
 	}
 
-	@Test
-	public void testDeleteOrder() {
-		long order_id = 1L;
-		String action = "DEL ORDER";
-		
-		Mockito.when(utils.getLong()).thenReturn(order_id);
-		Mockito.when(dao.delete(order_id)).thenReturn(1);
-
-//		assertEquals(1, this.controller.delete());
+//	 @ParameterizedTest
+//	    @ValueSource(strings = {"DEL ORDER", "DEL ITEM"})
+//	    public void testDelete(String action) {
+//	    	long order_id = 1L;
+//	    	long order_id2 = 2L;
+//	        Mockito.when(this.utils.getString()).thenReturn(action);
 //
-//		Mockito.verify(utils, Mockito.times(1)).getLong();
-//		Mockito.verify(dao, Mockito.times(1)).delete(order_id);
-	}
-//	
-//	public void testDeleteItem() {
-//		long order_id2 = 1L;
-//		long item_id = 1L;
-//		String action = "DEL ITEM";
-//		Mockito.when(utils.getLong()).thenReturn(order_id2);
-//		Mockito.when(utils.getLong()).thenReturn(item_id);
-//		Mockito.when(dao.itemDelete(order_id2, item_id)).thenReturn(1);
+//	        switch (action) {
+//	            case "DEL ORDER":
+//	            	 Mockito.when(utils.getLong()).thenReturn(order_id);
+//	                verify(dao).delete(anyLong());
+//	                break;
+//	            case "DEL ITEM":
+//	            	 Mockito.when(utils.getLong()).thenReturn(order_id2);
+//	                verify(dao).itemDelete(anyLong(), anyLong());
+//	                break;
+//	            default:
+//	                verifyNoInteractions(dao);
+//	        }
 //
-//		assertEquals(1, this.controller.delete());
-//
-//		Mockito.verify(utils, Mockito.times(2)).getLong();
-//		Mockito.verify(dao, Mockito.times(1)).itemDelete(order_id2, item_id);
-//	}
+//	        verifyNoMoreInteractions(dao);
+//	    }
 
 }

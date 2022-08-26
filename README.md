@@ -1,4 +1,4 @@
-Coverage: 63.2% (in progress)
+Coverage: 66.7% (there's testing failures for things I think should work... not sure what I've missed)
 # Inventory Management System (IMS) for a Cocktail Bar
 
 Using the given project template, the code has been altered and expanded so as to provide a fully functional command line interface that can be used by staff. The context is a bar service, which allows customers to make an account, and create an order composed of several drinks in the bars inventory such as cocktails, beer, cider, wine etc. This order connects to the staff interface of the application, which allows them to update their menu, view orders, take payment, etc. Therefore this application provides the medium for the bar to take online orders from customers, and also to keep stock of their current inventory and menu.
