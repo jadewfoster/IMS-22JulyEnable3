@@ -90,7 +90,7 @@ public class OrderControllerTest {
 //
 //		Mockito.verify(utils, Mockito.times(1)).getLong();
 //		Mockito.verify(dao, Mockito.times(1)).delete(order_id);
-//	}
+	}
 //	
 //	public void testDeleteItem() {
 //		long order_id2 = 1L;
@@ -104,6 +104,6 @@ public class OrderControllerTest {
 //
 //		Mockito.verify(utils, Mockito.times(2)).getLong();
 //		Mockito.verify(dao, Mockito.times(1)).itemDelete(order_id2, item_id);
-	}
+//	}
 
 }
