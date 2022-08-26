@@ -7,7 +7,8 @@ Jira was used to create a Scrum board, as shown below:
 
 https://jadewfoster.atlassian.net/jira/software/projects/J3PROJ/boards/2/roadmap
 
-<img src="/documentation/screenshots/jira-scrum-board" alt="Jira Scrum Board" style ="width:128px;height:128px;">
+<img src="/documentation/screenshots/jira-scrum-board.jpg" alt="Jira Scrum Board" style ="width:128px;height:128px;">
+file:///C:/Users/44749/Desktop/QA/Projects/IMS-22JulyEnable3/documentation/screenshots/jira-scrum-board.jpg
 
 ## Getting Started
 
@@ -39,7 +40,8 @@ When you have everything installed, fork the repo and open the project in Eclips
 You can also use this program in the command line, by using git bash where the ims-0.0.1-jar-with-dependencies.jar file is located.
 Type "java -jar ims-0.0.1-jar-with-dependencies.jar" and the program will run as shown:
 
-<img src="/documentation/screenshots/command-line-wow-it-works" alt="Running in Command Line" style ="width:128px;height:128px;">
+<img src="/documentation/screenshots/command-line-wow-it-works.png" alt="Running in Command Line" style ="width:128px;height:128px;">
+file:///C:/Users/44749/Desktop/QA/Projects/IMS-22JulyEnable3/documentation/screenshots/command-line-wow-it-works.png
 
 ## Using the application
 
